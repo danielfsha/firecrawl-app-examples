@@ -1,0 +1,1 @@
+cd firecrawl-ui && pnpm exec prettier --check . && pnpm run lint
