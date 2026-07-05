@@ -1,28 +1,55 @@
 ---
 title: Button
 description: Displays a button or a component that looks like a button.
-preview: button
 ---
+
+import { Button } from "@/components/ui/button";
+import { Preview } from "@/components/mdx/component-preview";
+import { CodeInstall } from "@/components/ui/code-install";
+import { CodeBlock } from "@/components/ui/code-block";
+import { ExpandableCode } from "@/components/expandable-code";
+import { ArrowRight } from "lucide-react";
 
 # Button
 
 Displays a button or a component that looks like a button.
 
-<preview>button</preview>
+<Preview>
+  <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+    <Button variant="default">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="outline">Outline</Button>
+    <Button variant="ghost">Ghost</Button>
+    <Button variant="destructive">Destructive</Button>
+  </div>
+</Preview>
 
 ## Installation
 
-<install>firecrawl</install>
+<CodeInstall
+  tabs={[
+    { label: "npm", code: "npm install firecrawl" },
+    { label: "pnpm", code: "pnpm add firecrawl" },
+    { label: "yarn", code: "yarn add firecrawl" },
+    { label: "bun", code: "bun add firecrawl" },
+  ]}
+/>
 
 ## Usage
 
-```tsx
-import { Button } from "@/components/ui/button";
-```
+<Preview>
+  <Button variant="outline">Button</Button>
+</Preview>
 
-```tsx
-<Button variant="outline">Button</Button>
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`import { Button } from "@/components/ui/button";
+
+<Button variant="outline">Button</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ## Examples
 
@@ -30,159 +57,146 @@ import { Button } from "@/components/ui/button";
 
 Use the `size` prop to change the size of the button.
 
-```tsx
-<Button size="xs">Extra Small</Button>
+<Preview>
+  <div
+    style={{
+      display: "flex",
+      gap: "8px",
+      alignItems: "center",
+      flexWrap: "wrap",
+    }}
+  >
+    <Button size="xs">Extra Small</Button>
+    <Button size="sm">Small</Button>
+    <Button size="default">Default</Button>
+    <Button size="lg">Large</Button>
+  </div>
+</Preview>
+
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button size="xs">Extra Small</Button>
 <Button size="sm">Small</Button>
 <Button size="default">Default</Button>
-<Button size="lg">Large</Button>
-```
-
-### Default
-
-```tsx
-import { Button } from "@/components/ui/button";
-
-export function ButtonDefault() {
-  return <Button>Click me</Button>;
-}
-```
+<Button size="lg">Large</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### Outline
 
-```tsx
-import { Button } from "@/components/ui/button";
+<Preview>
+  <Button variant="outline">Outline</Button>
+</Preview>
 
-export function ButtonOutline() {
-  return <Button variant="outline">Outline</Button>;
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button variant="outline">Outline</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### Secondary
 
-```tsx
-import { Button } from "@/components/ui/button";
+<Preview>
+  <Button variant="secondary">Secondary</Button>
+</Preview>
 
-export function ButtonSecondary() {
-  return <Button variant="secondary">Secondary</Button>;
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button variant="secondary">Secondary</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### Ghost
 
-```tsx
-import { Button } from "@/components/ui/button";
+<Preview>
+  <Button variant="ghost">Ghost</Button>
+</Preview>
 
-export function ButtonGhost() {
-  return <Button variant="ghost">Ghost</Button>;
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button variant="ghost">Ghost</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### Destructive
 
-```tsx
-import { Button } from "@/components/ui/button";
+<Preview>
+  <Button variant="destructive">Delete</Button>
+</Preview>
 
-export function ButtonDestructive() {
-  return <Button variant="destructive">Delete</Button>;
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button variant="destructive">Delete</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### Link
 
-```tsx
-import { Button } from "@/components/ui/button";
+<Preview>
+  <Button variant="link">Link Button</Button>
+</Preview>
 
-export function ButtonLink() {
-  return <Button variant="link">Link Button</Button>;
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button variant="link">Link Button</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### Icon
 
-```tsx
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+<Preview>
+  <Button size="icon">
+    <ArrowRight />
+  </Button>
+</Preview>
 
-export function ButtonIcon() {
-  return (
-    <Button size="icon">
-      <ArrowRight />
-    </Button>
-  );
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`import { ArrowRight } from "lucide-react";
+
+<Button size="icon">
+  <ArrowRight />
+</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ### With Icon
 
-Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the icon for the correct spacing.
+<Preview>
+  <Button size="lg">
+    Get Started
+    <ArrowRight data-icon="inline-end" />
+  </Button>
+</Preview>
 
-```tsx
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-export function ButtonWithIcon() {
-  return (
-    <Button size="lg">
-      Get Started
-      <ArrowRight data-icon="inline-end" />
-    </Button>
-  );
-}
-```
-
-### Spinner
-
-Render a loading state inside the button to indicate processing.
-
-```tsx
-import { Button } from "@/components/ui/button";
-
-export function ButtonLoading() {
-  return (
-    <Button disabled>
-      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="4"
-          fill="none"
-        />
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-        />
-      </svg>
-      Processing...
-    </Button>
-  );
-}
-```
-
-### As Link
-
-You can use the `buttonVariants` helper to make a link look like a button.
-
-```tsx
-import { buttonVariants } from "@/components/ui/button";
-
-export function ButtonAsLink() {
-  return (
-    <a href="/docs" className={buttonVariants({ variant: "outline" })}>
-      Read Docs
-    </a>
-  );
-}
-```
+<ExpandableCode>
+  <CodeBlock
+    code={`<Button size="lg">
+  Get Started
+  <ArrowRight data-icon="inline-end" />
+</Button>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>
 
 ## API Reference
 
 ### Button
-
-The Button component is a wrapper around the Base UI button element.
 
 | Prop      | Type                                                                                 | Default     |
 | --------- | ------------------------------------------------------------------------------------ | ----------- |
@@ -191,11 +205,16 @@ The Button component is a wrapper around the Base UI button element.
 
 ### buttonVariants
 
-A `cva` helper function that returns the class names for the button variants. Use this to style non-button elements as buttons.
+A `cva` helper function for styling non-button elements as buttons.
 
-```tsx
-import { buttonVariants } from "@/components/ui/button";
+<ExpandableCode>
+  <CodeBlock
+    code={`import { buttonVariants } from "@/components/ui/button";
 
-// Use with any element
-<a className={buttonVariants({ variant: "outline", size: "sm" })}>Link</a>;
-```
+<a className={buttonVariants({ variant: "outline", size: "sm" })}>
+  Link
+</a>`}
+    language="tsx"
+    showLineNumbers={true}
+  />
+</ExpandableCode>

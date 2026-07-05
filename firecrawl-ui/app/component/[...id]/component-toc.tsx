@@ -7,16 +7,16 @@ import {
   type TOCItemType,
 } from "@/components/ui/toc";
 
-interface TocHeading {
-  id: string;
-  label: string;
+interface SerializedTocItem {
+  title: string;
+  url: string;
   depth: number;
 }
 
-export function ComponentTOC({ headings }: { headings: TocHeading[] }) {
+export function ComponentTOC({ headings }: { headings: SerializedTocItem[] }) {
   const tocItems: TOCItemType[] = headings.map((h) => ({
-    title: h.label,
-    url: `#${h.id}`,
+    title: h.title,
+    url: h.url,
     depth: h.depth,
   }));
 

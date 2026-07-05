@@ -149,9 +149,9 @@ export function SiteNavbar() {
           <div className="hidden lg:flex items-center gap-1">
             <NavbarDropdown id="products" label="Products" />
             <NavbarDropdown id="resources" label="Resources" />
-            <NavbarLink href="/pricing">Pricing</NavbarLink>
+            {/* <NavbarLink href="/pricing">Pricing</NavbarLink>
             <NavbarLink href="/docs">Docs</NavbarLink>
-            <NavbarLink href="/blog">Blog</NavbarLink>
+            <NavbarLink href="/blog">Blog</NavbarLink> */}
             <NavbarLink href="/playground">Playground</NavbarLink>
           </div>
           <div className="flex items-center gap-2">

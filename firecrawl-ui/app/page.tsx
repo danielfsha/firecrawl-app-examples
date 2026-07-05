@@ -135,7 +135,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-screen h-screen overflow-hidden">
-      <SiteNavbar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar items={SIDEBAR_ITEMS} />
         <main className="gap-7 flex flex-col flex-1 items-center bg-[#F9F9F9] font-sans dark:bg-black pt-12 pb-24 overflow-y-auto">

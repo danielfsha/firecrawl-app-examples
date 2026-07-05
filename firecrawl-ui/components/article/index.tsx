@@ -38,7 +38,7 @@ function Root({ data, children, className }: RootProps) {
   return (
     <ArticleContext.Provider value={contextValue}>
       <div
-        className={cn(className)}
+        className={cn(className, "mx-auto")}
         style={{
           display: "flex",
           flexDirection: "column",
