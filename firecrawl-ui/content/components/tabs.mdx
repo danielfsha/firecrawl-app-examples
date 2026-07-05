@@ -1,0 +1,28 @@
+---
+title: Tabs
+description: Tabbed navigation component with animated indicators.
+---
+
+# Tabs
+
+A tabbed navigation component with animated active indicators and dividers.
+
+## Usage
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsDivider } from "@/components/ui/tabs";
+
+export function Example() {
+  return (
+    <Tabs defaultValue="one">
+      <TabsList>
+        <TabsTrigger value="one">Tab One</TabsTrigger>
+        <TabsDivider />
+        <TabsTrigger value="two">Tab Two</TabsTrigger>
+        <TabsDivider />
+        <TabsTrigger value="three">Tab Three</TabsTrigger>
+      </TabsList>
+    </Tabs>
+  );
+}
+```

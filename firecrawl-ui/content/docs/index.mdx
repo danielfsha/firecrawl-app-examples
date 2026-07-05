@@ -1,0 +1,196 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+---
+
+## Installation
+
+```bash
+pnpm dlx shadcn@latest add button
+```
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button";
+```
+
+```tsx
+<Button variant="outline">Button</Button>
+```
+
+## Cursor
+
+Tailwind v4 switched from `cursor: pointer` to `cursor: default` for the button component.
+
+If you want to keep the `cursor: pointer` behavior, add the following to your CSS file:
+
+```css title="globals.css"
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+```
+
+## Examples
+
+### Default
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonDefault() {
+  return <Button>Button</Button>;
+}
+```
+
+### Outline
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonOutline() {
+  return <Button variant="outline">Button</Button>;
+}
+```
+
+### Secondary
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonSecondary() {
+  return <Button variant="secondary">Button</Button>;
+}
+```
+
+### Ghost
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonGhost() {
+  return <Button variant="ghost">Button</Button>;
+}
+```
+
+### Destructive
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonDestructive() {
+  return <Button variant="destructive">Button</Button>;
+}
+```
+
+### Link
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonLink() {
+  return <Button variant="link">Button</Button>;
+}
+```
+
+### Icon
+
+```tsx
+import { CircleFadingArrowUpIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ButtonIcon() {
+  return (
+    <Button size="icon">
+      <CircleFadingArrowUpIcon />
+    </Button>
+  );
+}
+```
+
+### With Icon
+
+Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the icon for the correct spacing.
+
+```tsx
+import { IconGitBranch } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
+
+export function ButtonWithIcon() {
+  return (
+    <Button>
+      <IconGitBranch data-icon="inline-start" />
+      Branch
+    </Button>
+  );
+}
+```
+
+### Rounded
+
+Use the `rounded-full` class to make the button rounded.
+
+```tsx
+import { ArrowUpIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ButtonRounded() {
+  return (
+    <Button size="icon" className="rounded-full">
+      <ArrowUpIcon />
+    </Button>
+  );
+}
+```
+
+### Size
+
+Use the `size` prop to change the size of the button.
+
+```tsx
+import { ArrowUpRightIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ButtonSizes() {
+  return (
+    <div className="flex items-center gap-4">
+      <Button size="xs">Extra Small</Button>
+      <Button size="sm">Small</Button>
+      <Button size="default">Default</Button>
+      <Button size="lg">Large</Button>
+    </div>
+  );
+}
+```
+
+### As Child
+
+You can use the `asChild` prop on `<Button />` to make another component look like a button.
+
+```tsx
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+export function ButtonAsChild() {
+  return (
+    <Button asChild>
+      <Link href="/docs">Documentation</Link>
+    </Button>
+  );
+}
+```
+
+## API Reference
+
+### Button
+
+The Button component is a wrapper around the button element that adds a variety of styles and functionality.
+
+| Prop      | Type                                                                                 | Default     |
+| --------- | ------------------------------------------------------------------------------------ | ----------- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"`        | `"default"` |
+| `size`    | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
+| `asChild` | `boolean`                                                                            | `false`     |

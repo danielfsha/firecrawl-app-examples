@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { RootProvider } from "fumadocs-ui/provider/next";
+import { SiteNavbar } from "@/components/nav-implementation";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -36,8 +38,20 @@ export default function RootLayout({
         "font-sans",
         inter.variable
       )}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col w-screen h-screen overflow-hidden flex flex-col">
+        <RootProvider
+          theme={{
+            defaultTheme: "light",
+            enableSystem: false,
+            forcedTheme: "light",
+          }}
+        >
+          <SiteNavbar />
+          <div className="w-full flex-1 overflow-y-scroll">{children}</div>
+        </RootProvider>
+      </body>
     </html>
   );
 }
