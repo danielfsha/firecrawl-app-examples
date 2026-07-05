@@ -44,9 +44,8 @@ function Root({ data, children, className }: RootProps) {
           flexDirection: "column",
           width: "100%",
           maxWidth: "640px",
-          paddingBlockStart: "64px",
-          paddingBlockEnd: "256px",
-          margin: "0 auto",
+          paddingBlockStart: "0",
+          paddingBlockEnd: "64px",
         }}
       >
         {children}

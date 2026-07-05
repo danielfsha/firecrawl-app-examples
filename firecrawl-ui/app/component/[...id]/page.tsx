@@ -1,8 +1,13 @@
 import { notFound } from "next/navigation";
 import { getComponentPage, getComponentSlugs } from "@/lib/component-source";
-import { ArticleRoot, ArticleHeader, ArticleContent } from "@/components/article";
+import {
+  ArticleRoot,
+  ArticleHeader,
+  ArticleContent,
+} from "@/components/article";
 import { MarkdownRenderer } from "@/components/mdx/markdown-renderer";
 import { ComponentSidebar } from "./sidebar";
+import { ComponentTOC } from "./component-toc";
 import type { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -37,14 +42,13 @@ export default async function ComponentDetailPage(props: {
 
   return (
     <div className="grid-layout-3col min-h-screen">
-      {/* Left column: sidebar (hidden on mobile) */}
-      <div className="relative hidden lg:block border-r border-(--fc-border-faint)">
+      {/* Left gutter: sidebar */}
+      <div className="relative hidden lg:flex justify-end border-r border-(--fc-border-faint)">
         <ComponentSidebar activeSlug={slug} />
       </div>
 
-      {/* Middle column: content */}
-      <div className="col-start-2 px-6">
-        <div style={{ minHeight: "124px" }} />
+      {/* Middle: article */}
+      <div className="col-start-2 px-6 lg:px-10">
         <ArticleRoot
           data={{
             title: page.title,
@@ -59,8 +63,10 @@ export default async function ComponentDetailPage(props: {
         </ArticleRoot>
       </div>
 
-      {/* Right column: empty gutter */}
-      <div className="hidden lg:block border-l border-(--fc-border-faint)" />
+      {/* Right gutter: TOC */}
+      <div className="relative hidden lg:block border-l border-(--fc-border-faint) px-4">
+        <ComponentTOC headings={page.headings} />
+      </div>
     </div>
   );
 }

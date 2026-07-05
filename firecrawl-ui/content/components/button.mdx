@@ -1,41 +1,201 @@
 ---
 title: Button
-description: A versatile button component with multiple variants and sizes.
+description: Displays a button or a component that looks like a button.
 preview: button
 ---
 
 # Button
 
-A versatile button component built on top of Base UI with multiple variants and sizes.
-
-## Preview
+Displays a button or a component that looks like a button.
 
 <preview>button</preview>
+
+## Installation
+
+<install>firecrawl</install>
 
 ## Usage
 
 ```tsx
 import { Button } from "@/components/ui/button";
-
-<Button variant="default">Primary</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
 ```
 
-## Variants
+```tsx
+<Button variant="outline">Button</Button>
+```
 
-- `default` — Primary orange button
-- `secondary` — Subtle gray background
-- `outline` — Bordered with transparent fill
-- `ghost` — No background until hovered
-- `destructive` — Red for dangerous actions
-- `link` — Styled as an underlined link
+## Examples
 
-## Sizes
+### Size
 
-- `xs` — Extra small
-- `sm` — Small
-- `default` — Standard
-- `lg` — Large
-- `icon` — Square icon button
+Use the `size` prop to change the size of the button.
+
+```tsx
+<Button size="xs">Extra Small</Button>
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+```
+
+### Default
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonDefault() {
+  return <Button>Click me</Button>;
+}
+```
+
+### Outline
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonOutline() {
+  return <Button variant="outline">Outline</Button>;
+}
+```
+
+### Secondary
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonSecondary() {
+  return <Button variant="secondary">Secondary</Button>;
+}
+```
+
+### Ghost
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonGhost() {
+  return <Button variant="ghost">Ghost</Button>;
+}
+```
+
+### Destructive
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonDestructive() {
+  return <Button variant="destructive">Delete</Button>;
+}
+```
+
+### Link
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonLink() {
+  return <Button variant="link">Link Button</Button>;
+}
+```
+
+### Icon
+
+```tsx
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ButtonIcon() {
+  return (
+    <Button size="icon">
+      <ArrowRight />
+    </Button>
+  );
+}
+```
+
+### With Icon
+
+Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the icon for the correct spacing.
+
+```tsx
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ButtonWithIcon() {
+  return (
+    <Button size="lg">
+      Get Started
+      <ArrowRight data-icon="inline-end" />
+    </Button>
+  );
+}
+```
+
+### Spinner
+
+Render a loading state inside the button to indicate processing.
+
+```tsx
+import { Button } from "@/components/ui/button";
+
+export function ButtonLoading() {
+  return (
+    <Button disabled>
+      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+          fill="none"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+        />
+      </svg>
+      Processing...
+    </Button>
+  );
+}
+```
+
+### As Link
+
+You can use the `buttonVariants` helper to make a link look like a button.
+
+```tsx
+import { buttonVariants } from "@/components/ui/button";
+
+export function ButtonAsLink() {
+  return (
+    <a href="/docs" className={buttonVariants({ variant: "outline" })}>
+      Read Docs
+    </a>
+  );
+}
+```
+
+## API Reference
+
+### Button
+
+The Button component is a wrapper around the Base UI button element.
+
+| Prop      | Type                                                                                 | Default     |
+| --------- | ------------------------------------------------------------------------------------ | ----------- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"`        | `"default"` |
+| `size`    | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
+
+### buttonVariants
+
+A `cva` helper function that returns the class names for the button variants. Use this to style non-button elements as buttons.
+
+```tsx
+import { buttonVariants } from "@/components/ui/button";
+
+// Use with any element
+<a className={buttonVariants({ variant: "outline", size: "sm" })}>Link</a>;
+```

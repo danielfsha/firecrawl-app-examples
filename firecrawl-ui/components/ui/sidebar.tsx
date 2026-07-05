@@ -22,7 +22,7 @@ function Sidebar({ items, className }: SidebarProps) {
   return (
     <aside
       className={cn(
-        "sticky top-[120px] h-[calc(100vh-120px)] w-[220px] shrink-0 overflow-y-auto py-6 px-2 font-sans",
+        "sticky top-0 h-screen w-[260px] ml-auto shrink-0 overflow-y-auto py-4 px-2 font-sans",
         className
       )}
     >
