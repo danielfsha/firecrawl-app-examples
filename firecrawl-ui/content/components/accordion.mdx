@@ -1,0 +1,220 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import { Preview } from "@/components/mdx/preview"
+import { CodeInstall } from "@/components/ui/code-install"
+
+# Accordion
+
+A vertically stacked set of interactive headings that each reveal a section of content.
+
+<Preview code={`import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+
+<Accordion defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>What are your shipping options?</AccordionTrigger>
+    <AccordionContent>
+      We offer standard (5-7 days), express (2-3 days), and overnight shipping.
+      Free shipping on international orders.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>What is your return policy?</AccordionTrigger>
+    <AccordionContent>
+      You can return any item within 30 days for a full refund.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>How can I contact customer support?</AccordionTrigger>
+    <AccordionContent>
+      Reach us via email at support@firecrawl.dev or through our live chat.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion defaultValue={["item-1"]}>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>What are your shipping options?</AccordionTrigger>
+      <AccordionContent>
+        We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free shipping on international orders.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>What is your return policy?</AccordionTrigger>
+      <AccordionContent>
+        You can return any item within 30 days for a full refund.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>How can I contact customer support?</AccordionTrigger>
+      <AccordionContent>
+        Reach us via email at support@firecrawl.dev or through our live chat.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+## Installation
+
+<CodeInstall
+  tabs={[
+    { label: "npm", code: "npm install firecrawl" },
+    { label: "pnpm", code: "pnpm add firecrawl" },
+    { label: "yarn", code: "yarn add firecrawl" },
+    { label: "bun", code: "bun add firecrawl" },
+  ]}
+/>
+
+## Usage
+
+<Preview code={`import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+
+<Accordion defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion defaultValue={["item-1"]}>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Is it accessible?</AccordionTrigger>
+      <AccordionContent>
+        Yes. It adheres to the WAI-ARIA design pattern.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+## Composition
+
+```
+Accordion
+├── AccordionItem
+│   ├── AccordionTrigger
+│   └── AccordionContent
+└── AccordionItem
+    ├── AccordionTrigger
+    └── AccordionContent
+```
+
+## Examples
+
+### Basic
+
+A basic accordion that shows one item at a time. The first item is open by default.
+
+<Preview code={`<Accordion defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>How do I reset my password?</AccordionTrigger>
+    <AccordionContent>
+      Click on 'Forgot Password' on the login page, enter your email,
+      and we'll send you a reset link. The link expires in 24 hours.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Can I change my subscription plan?</AccordionTrigger>
+    <AccordionContent>
+      Yes, you can upgrade or downgrade your plan at any time from your
+      account settings.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>What payment methods do you accept?</AccordionTrigger>
+    <AccordionContent>
+      We accept Visa, Mastercard, American Express, and PayPal.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion defaultValue={["item-1"]}>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>How do I reset my password?</AccordionTrigger>
+      <AccordionContent>
+        Click on 'Forgot Password' on the login page, enter your email, and we'll send you a reset link. The link expires in 24 hours.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Can I change my subscription plan?</AccordionTrigger>
+      <AccordionContent>
+        Yes, you can upgrade or downgrade your plan at any time from your account settings.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>What payment methods do you accept?</AccordionTrigger>
+      <AccordionContent>
+        We accept Visa, Mastercard, American Express, and PayPal.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+### Disabled
+
+Use the `disabled` prop on `AccordionItem` to disable individual items.
+
+<Preview code={`<Accordion defaultValue={["item-1"]}>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Can I access my account history?</AccordionTrigger>
+    <AccordionContent>
+      Yes, your full account history is available in the dashboard.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2" disabled>
+    <AccordionTrigger>Premium feature information</AccordionTrigger>
+    <AccordionContent>
+      This section is only available for premium users.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion defaultValue={["item-1"]}>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Can I access my account history?</AccordionTrigger>
+      <AccordionContent>
+        Yes, your full account history is available in the dashboard.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2" disabled>
+      <AccordionTrigger>Premium feature information</AccordionTrigger>
+      <AccordionContent>
+        This section is only available for premium users.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+## API Reference
+
+### Accordion
+
+| Prop | Type | Default |
+|------|------|---------|
+| `defaultValue` | `string[]` | `[]` |
+| `className` | `string` | — |
+
+### AccordionItem
+
+| Prop | Type | Default |
+|------|------|---------|
+| `value` | `string` (required) | — |
+| `disabled` | `boolean` | `false` |
+
+### AccordionTrigger
+
+The heading button that toggles content visibility.
+
+### AccordionContent
+
+The collapsible panel that appears when the trigger is activated.

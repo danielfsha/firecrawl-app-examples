@@ -63,11 +63,14 @@ function CodeInstall({ tabs, className }: CodeInstallProps) {
           </TabsList>
         </Tabs>
       </div>
-      <CodeBlock
+      <div className="pl-4">
+        <CodeBlock
+        className="bg-transparent border-none"
         code={active.code}
         language={active.language || "bash"}
         showLineNumbers={false}
       />
+      </div>
     </div>
   );
 }

@@ -13,11 +13,16 @@ interface SidebarItem {
 interface SidebarProps {
   items: SidebarItem[];
   className?: string;
+  activeHref?: string;
 }
 
-function Sidebar({ items, className }: SidebarProps) {
+function Sidebar({ items, className, activeHref }: SidebarProps) {
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
-  const [activeIdx, setActiveIdx] = React.useState<number | null>(null);
+  const [activeIdx, setActiveIdx] = React.useState<number | null>(() => {
+    if (!activeHref) return null;
+    const idx = items.findIndex((item) => item.href === activeHref);
+    return idx >= 0 ? idx : null;
+  });
 
   return (
     <aside
@@ -57,6 +62,7 @@ function Sidebar({ items, className }: SidebarProps) {
                 onClick={(e) => {
                   e.preventDefault();
                   setActiveIdx(idx);
+                  window.location.href = item.href;
                 }}
               >
                 {isHovered && !isActive && (

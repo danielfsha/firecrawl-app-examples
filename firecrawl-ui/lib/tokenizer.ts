@@ -4,6 +4,7 @@ import bash from "shiki/langs/shellscript.mjs";
 import javascript from "shiki/langs/javascript.mjs";
 import python from "shiki/langs/python.mjs";
 import typescript from "shiki/langs/typescript.mjs";
+import tsx from "shiki/langs/tsx.mjs";
 import json from "shiki/langs/json.mjs";
 import vitesseDark from "shiki/themes/vitesse-dark.mjs";
 
@@ -31,7 +32,7 @@ function getHighlighter() {
     try {
       highlighter = createHighlighterCoreSync({
         themes: [vitesseDark],
-        langs: [bash, javascript, python, typescript, json],
+        langs: [bash, javascript, python, typescript, tsx, json],
         engine: createJavaScriptRegexEngine(),
       });
     } catch {
@@ -46,6 +47,7 @@ const LANG_MAP: Record<string, string> = {
   javascript: "javascript",
   python: "python",
   typescript: "typescript",
+  tsx: "tsx",
   json: "json",
 };
 

@@ -1,0 +1,78 @@
+---
+title: Switch
+description: A control that allows the user to toggle between checked and not checked.
+---
+
+import { Switch } from "@/components/ui/switch"
+import { Preview } from "@/components/mdx/preview"
+import { CodeInstall } from "@/components/ui/code-install"
+
+# Switch
+
+A control that allows the user to toggle between checked and not checked.
+
+<Preview code={`import { Switch } from "@/components/ui/switch";
+
+<Switch />`}>
+  <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+    <Switch />
+    <Switch defaultChecked />
+  </div>
+</Preview>
+
+## Installation
+
+<CodeInstall
+  tabs={[
+    { label: "npm", code: "npm install firecrawl" },
+    { label: "pnpm", code: "pnpm add firecrawl" },
+    { label: "yarn", code: "yarn add firecrawl" },
+    { label: "bun", code: "bun add firecrawl" },
+  ]}
+/>
+
+## Usage
+
+<Preview code={`import { Switch } from "@/components/ui/switch";
+
+<Switch />`}>
+  <Switch />
+</Preview>
+
+## Examples
+
+### Default
+
+<Preview code={`<Switch />`}>
+  <Switch />
+</Preview>
+
+### Checked
+
+<Preview code={`<Switch defaultChecked />`}>
+  <Switch defaultChecked />
+</Preview>
+
+### Disabled
+
+Add the `disabled` prop to prevent interaction.
+
+<Preview code={`<Switch disabled />
+<Switch disabled defaultChecked />`}>
+  <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+    <Switch disabled />
+    <Switch disabled defaultChecked />
+  </div>
+</Preview>
+
+## API Reference
+
+### Switch
+
+| Prop | Type | Default |
+|------|------|---------|
+| `defaultChecked` | `boolean` | `false` |
+| `checked` | `boolean` | — |
+| `onCheckedChange` | `(checked: boolean) => void` | — |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | — |

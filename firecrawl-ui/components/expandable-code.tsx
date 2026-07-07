@@ -32,7 +32,7 @@ export function ExpandableCode({ children }: { children: React.ReactNode }) {
       <div
         ref={contentRef}
         className={cn(
-          "transition-[max-height] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+          "transition-[max-height] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]  bg-white border shadow-[0_0px_0px_1px_rgba(0,0,0,0.01),0_20px_44px_0px_rgba(0,0,0,0.05)] rounded-lg",
           expanded
             ? "max-h-[640px] overflow-auto"
             : canExpand === false

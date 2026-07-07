@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Logo, LogoMenuItem, LogoMenuSeparator } from "@/components/ui/Logo";
 import { useGithubStars } from "@/hooks/use-github-stars";
+import Link from "next/link";
 
 export function SiteNavbar() {
   const { stars } = useGithubStars("mendableai", "firecrawl");
@@ -38,9 +39,10 @@ export function SiteNavbar() {
         {/* Row 1: Banner in middle column */}
         <NavbarBannerRow>
           <NavbarBanner href="/docs/monitor">
-            Introducing web-scale /monitor - always-on search that pings your
-            agent the moment something comes online.{" "}
-            <span className="underline">Read the docs →</span>
+            Unofficial Firecrawl-inspired component library built from{" "}
+            <Link href="https://www.firecrawl.dev/design.md" className="underline">
+              firecrawl.dev/design.md.
+            </Link>
           </NavbarBanner>
         </NavbarBannerRow>
 

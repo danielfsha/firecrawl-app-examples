@@ -7,6 +7,8 @@ import {
 } from "@/components/article";
 import { ComponentSidebar } from "./sidebar";
 import { ComponentTOC } from "./component-toc";
+import { GutterLayout } from "@/components/ui/gutter-layout";
+import { PageNav } from "@/components/ui/page-nav";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 
@@ -33,9 +35,29 @@ export async function generateMetadata(props: {
   const page = componentSource.getPage(params.slug);
   if (!page) return {};
 
+  const title = `${page.data.title} - Firecrawl UI`;
+  const description =
+    page.data.description || `${page.data.title} component documentation.`;
+  const url = `https://ui.firecrawl.dev/component/${params.slug?.join("/")}`;
+
   return {
-    title: page.data.title,
-    description: page.data.description,
+    title,
+    description,
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url,
+      siteName: "Firecrawl UI",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -47,40 +69,55 @@ export default async function ComponentDetailPage(props: {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const slug = params.id?.join("/") ?? "";
+  const title = page.data.title;
+  const description = page.data.description ?? "";
+
+  const allPages = componentSource.getPages();
+  const sidebarItems = allPages.map((p) => ({
+    label: p.data.title,
+    href: p.url,
+  }));
+
+  // Compute prev/next pages
+  const currentIdx = allPages.findIndex((p) => p.url === page.url);
+  const prevPage = currentIdx > 0 ? allPages[currentIdx - 1] : null;
+  const nextPage =
+    currentIdx < allPages.length - 1 ? allPages[currentIdx + 1] : null;
 
   return (
-    <div className="grid-layout-3col min-h-screen">
-      {/* Left gutter: sidebar */}
-      <div className="relative hidden lg:flex justify-end border-r border-(--fc-border-faint)">
-        <ComponentSidebar activeSlug={params.id?.[0] ?? ""} />
-      </div>
-
-      {/* Middle: article */}
-      <div className="col-start-2 px-6 lg:px-10">
-        <ArticleRoot
-          data={{
-            title: page.data.title,
-            description: page.data.description ?? "",
-            slug: params.id?.join("/") ?? "",
-          }}
-        >
+    <GutterLayout
+      className="h-screen"
+      left={
+        <ComponentSidebar
+          items={sidebarItems}
+          activeSlug={params.id?.[0] ?? ""}
+        />
+      }
+      right={
+        <div className="px-4">
+          <ComponentTOC
+            headings={page.data.toc.map((item) => ({
+              title: extractTocText(item.title),
+              url: item.url,
+              depth: item.depth,
+            }))}
+          />
+        </div>
+      }
+    >
+      <div className="px-4 lg:px-10 overflow-x-hidden overflow-y-scroll">
+        <ArticleRoot data={{ title, description, slug }}>
           <ArticleHeader />
           <ArticleContent>
             <MDX components={getMDXComponents()} />
           </ArticleContent>
+          <PageNav
+            prev={prevPage ? { label: prevPage.data.title, href: prevPage.url } : null}
+            next={nextPage ? { label: nextPage.data.title, href: nextPage.url } : null}
+          />
         </ArticleRoot>
       </div>
-
-      {/* Right gutter: TOC */}
-      <div className="relative hidden lg:block border-l border-(--fc-border-faint) px-4">
-        <ComponentTOC
-          headings={page.data.toc.map((item) => ({
-            title: extractTocText(item.title),
-            url: item.url,
-            depth: item.depth,
-          }))}
-        />
-      </div>
-    </div>
+    </GutterLayout>
   );
 }
