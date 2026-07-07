@@ -1,0 +1,132 @@
+---
+title: Logo
+description: An interactive logo component with a context menu for brand actions like copying SVG and downloading assets.
+---
+
+import { Logo, LogoMenuItem, LogoMenuSeparator } from "@/components/ui/Logo"
+import { Preview } from "@/components/mdx/preview"
+import { CodeInstall } from "@/components/ui/code-install"
+
+# Logo
+
+An interactive logo component with a context menu for brand actions. Right-click or long-press to reveal menu options.
+
+<Preview code={`import { Logo, LogoMenuItem, LogoMenuSeparator } from "@/components/ui/Logo";
+
+<Logo>
+  <LogoMenuItem onClick={() => window.open("https://firecrawl.dev", "_blank")}>
+    Open in new tab
+  </LogoMenuItem>
+  <LogoMenuSeparator />
+  <LogoMenuItem onClick={() => navigator.clipboard.writeText("svg content")}>
+    Copy logo as SVG
+  </LogoMenuItem>
+  <LogoMenuItem>
+    Download brand assets
+  </LogoMenuItem>
+  <LogoMenuSeparator />
+  <LogoMenuItem onClick={() => window.open("https://firecrawl.dev/brand", "_blank")}>
+    Visit brand guidelines
+  </LogoMenuItem>
+</Logo>`}>
+  <Logo>
+    <LogoMenuItem onClick={() => window.open("https://firecrawl.dev", "_blank")}>
+      Open in new tab
+    </LogoMenuItem>
+    <LogoMenuSeparator />
+    <LogoMenuItem onClick={() => navigator.clipboard.writeText("firecrawl")}>
+      Copy logo as SVG
+    </LogoMenuItem>
+    <LogoMenuItem>
+      Download brand assets
+    </LogoMenuItem>
+    <LogoMenuSeparator />
+    <LogoMenuItem onClick={() => window.open("https://firecrawl.dev/brand", "_blank")}>
+      Visit brand guidelines
+    </LogoMenuItem>
+  </Logo>
+</Preview>
+
+## Installation
+
+<CodeInstall
+  tabs={[
+    { label: "npm", code: "npm install firecrawl" },
+    { label: "pnpm", code: "pnpm add firecrawl" },
+    { label: "yarn", code: "yarn add firecrawl" },
+    { label: "bun", code: "bun add firecrawl" },
+  ]}
+/>
+
+## Usage
+
+<Preview code={`import { Logo } from "@/components/ui/Logo";
+
+// Basic logo without menu
+<Logo />`}>
+  <Logo />
+</Preview>
+
+## Features
+
+- Right-click or long-press to open the context menu
+- Animated hover effect on menu items with spring physics
+- Text turns primary color on hover
+- Click outside to dismiss
+
+## Composition
+
+```
+Logo
+├── LogoMenuItem
+├── LogoMenuSeparator
+└── LogoMenuItem
+```
+
+## Examples
+
+### With Menu Items
+
+<Preview code={`<Logo>
+  <LogoMenuItem>Copy logo as SVG</LogoMenuItem>
+  <LogoMenuSeparator />
+  <LogoMenuItem>Download brand assets</LogoMenuItem>
+</Logo>`}>
+  <Logo>
+    <LogoMenuItem>Copy logo as SVG</LogoMenuItem>
+    <LogoMenuSeparator />
+    <LogoMenuItem>Download brand assets</LogoMenuItem>
+  </Logo>
+</Preview>
+
+### Standalone
+
+Without children, the logo renders without a context menu.
+
+<Preview code={`<Logo />`}>
+  <Logo />
+</Preview>
+
+## API Reference
+
+### Logo
+
+The root component. Renders the Firecrawl logo and manages the context menu state.
+
+| Prop | Type | Default |
+|------|------|---------|
+| `className` | `string` | — |
+| `children` | `ReactNode` | — |
+
+### LogoMenuItem
+
+A clickable item inside the logo context menu. Has animated hover background.
+
+| Prop | Type | Default |
+|------|------|---------|
+| `onClick` | `() => void` | — |
+| `children` | `ReactNode` | — |
+
+### LogoMenuSeparator
+
+A horizontal divider between menu items.
