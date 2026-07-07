@@ -4,6 +4,7 @@ import { Preview } from "@/components/mdx/preview";
 import { CodeInstall } from "@/components/ui/code-install";
 import { CodeBlock } from "@/components/ui/code-block";
 import { ExpandableCode } from "@/components/expandable-code";
+import { Steps, Step } from "@/components/ui/steps";
 
 function Pre({ children, ...props }: React.ComponentProps<"pre">) {
   const codeEl = children as React.ReactElement<{
@@ -12,15 +13,39 @@ function Pre({ children, ...props }: React.ComponentProps<"pre">) {
   }>;
   const className = codeEl?.props?.className || "";
   const match = /language-(\w+)/.exec(className);
-  const code = typeof codeEl?.props?.children === "string"
-    ? codeEl.props.children.replace(/\n$/, "")
-    : "";
+  const code =
+    typeof codeEl?.props?.children === "string"
+      ? codeEl.props.children.replace(/\n$/, "")
+      : "";
 
   if (match && code) {
     return (
-      <div style={{ margin: "16px 0", borderRadius: "8px", border: "1px solid var(--fc-border-faint)", overflow: "hidden" }}>
+      <div
+        style={{
+          margin: "16px 0",
+          borderRadius: "8px",
+          overflow: "hidden",
+        }}
+      >
         <ExpandableCode>
           <CodeBlock code={code} language={match[1]} showLineNumbers={true} />
+        </ExpandableCode>
+      </div>
+    );
+  }
+
+  // Fallback: still try to extract code from non-language-tagged blocks
+  if (code) {
+    return (
+      <div
+        style={{
+          margin: "16px 0",
+          borderRadius: "8px",
+          overflow: "hidden",
+        }}
+      >
+        <ExpandableCode>
+          <CodeBlock code={code} language="tsx" showLineNumbers={true} />
         </ExpandableCode>
       </div>
     );
@@ -32,12 +57,15 @@ function Pre({ children, ...props }: React.ComponentProps<"pre">) {
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
+    ...components,
+    // Override AFTER spreading to ensure our components take priority
     pre: Pre,
     Preview,
     CodeInstall,
     CodeBlock,
     ExpandableCode,
-    ...components,
+    Steps,
+    Step,
   } satisfies MDXComponents;
 }
 
