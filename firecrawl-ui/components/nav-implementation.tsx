@@ -22,7 +22,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Logo, LogoMenuItem, LogoMenuSeparator } from "@/components/ui/Logo";
 import { useGithubStars } from "@/hooks/use-github-stars";
-import Link from "next/link";
 
 export function SiteNavbar() {
   const { stars } = useGithubStars("mendableai", "firecrawl");
@@ -38,11 +37,9 @@ export function SiteNavbar() {
       <NavbarContent className="">
         {/* Row 1: Banner in middle column */}
         <NavbarBannerRow>
-          <NavbarBanner href="/docs/monitor">
+          <NavbarBanner>
             Unofficial Firecrawl-inspired component library built from{" "}
-            <Link href="https://www.firecrawl.dev/design.md" className="underline">
-              firecrawl.dev/design.md.
-            </Link>
+            <span className="underline">firecrawl.dev/design.md</span>
           </NavbarBanner>
         </NavbarBannerRow>
 

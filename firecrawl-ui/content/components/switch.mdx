@@ -14,13 +14,15 @@ A control that allows the user to toggle between checked and not checked.
 <Preview code={`import { Switch } from "@/components/ui/switch";
 
 <Switch />`}>
-  <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+  <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
     <Switch />
     <Switch defaultChecked />
   </div>
 </Preview>
 
 ## Installation
+
+### Command
 
 <CodeInstall
   tabs={[
@@ -30,6 +32,55 @@ A control that allows the user to toggle between checked and not checked.
     { label: "bun", code: "bun add firecrawl" },
   ]}
 />
+
+### Manual
+
+Install the following dependencies:
+
+<CodeInstall
+  tabs={[
+    { label: "npm", code: "npm install @base-ui/react" },
+    { label: "pnpm", code: "pnpm add @base-ui/react" },
+    { label: "yarn", code: "yarn add @base-ui/react" },
+    { label: "bun", code: "bun add @base-ui/react" },
+  ]}
+/>
+
+Copy and paste the following code into your project.
+
+```tsx
+"use client";
+
+import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
+import { cn } from "@/lib/utils";
+
+function Switch({
+  className,
+  size = "default",
+  ...props
+}: SwitchPrimitive.Root.Props & {
+  size?: "sm" | "default";
+}) {
+  return (
+    <SwitchPrimitive.Root
+      data-slot="switch"
+      data-size={size}
+      className={cn(
+        "peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all outline-none data-[size=default]:h-[20px] data-[size=default]:w-[50px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] data-checked:bg-primary data-unchecked:bg-input data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        className
+      )}
+      {...props}
+    >
+      <SwitchPrimitive.Thumb
+        data-slot="switch-thumb"
+        className="pointer-events-none block rounded-full bg-background ring-0 transition-transform group-data-[size=default]/switch:h-[16px] group-data-[size=default]/switch:w-[28px] group-data-[size=sm]/switch:size-3"
+      />
+    </SwitchPrimitive.Root>
+  );
+}
+
+export { Switch };
+```
 
 ## Usage
 
@@ -55,13 +106,29 @@ A control that allows the user to toggle between checked and not checked.
 
 ### Disabled
 
-Add the `disabled` prop to prevent interaction.
+Add the `disabled` prop to the Switch component to disable the switch.
 
 <Preview code={`<Switch disabled />
 <Switch disabled defaultChecked />`}>
-  <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+  <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
     <Switch disabled />
     <Switch disabled defaultChecked />
+  </div>
+</Preview>
+
+### Size
+
+Use the `size` prop to change the size of the switch.
+
+<Preview code={`<Switch size="sm" />
+<Switch size="default" />
+<Switch size="sm" defaultChecked />
+<Switch size="default" defaultChecked />`}>
+  <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+    <Switch size="sm" />
+    <Switch size="default" />
+    <Switch size="sm" defaultChecked />
+    <Switch size="default" defaultChecked />
   </div>
 </Preview>
 
@@ -75,4 +142,7 @@ Add the `disabled` prop to prevent interaction.
 | `checked` | `boolean` | — |
 | `onCheckedChange` | `(checked: boolean) => void` | — |
 | `disabled` | `boolean` | `false` |
+| `size` | `"sm" \| "default"` | `"default"` |
 | `className` | `string` | — |
+
+See the [Base UI Switch documentation](https://base-ui.com/react/components/switch) for more information.
