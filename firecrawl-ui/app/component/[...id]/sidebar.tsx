@@ -1,12 +1,12 @@
 "use client";
 
-import { Sidebar, type SidebarItem } from "@/components/ui/sidebar";
+import { Sidebar, type SidebarSection } from "@/components/ui/sidebar";
 
 interface ComponentSidebarProps {
-  items: SidebarItem[];
-  activeSlug: string;
+  sections: SidebarSection[];
+  activeHref: string;
 }
 
-export function ComponentSidebar({ items, activeSlug }: ComponentSidebarProps) {
-  return <Sidebar items={items} activeHref={`/component/${activeSlug}`} />;
+export function ComponentSidebar({ sections, activeHref }: ComponentSidebarProps) {
+  return <Sidebar sections={sections} activeHref={activeHref} />;
 }

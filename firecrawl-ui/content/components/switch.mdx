@@ -6,7 +6,10 @@ description: A control that allows the user to toggle between checked and not ch
 import { Switch } from "@/components/ui/switch"
 import { Preview } from "@/components/mdx/preview"
 import { CodeInstall } from "@/components/ui/code-install"
+import { CodeBlock } from "@/components/ui/code-block"
+import { ExpandableCode } from "@/components/expandable-code"
 import { Steps, Step } from "@/components/ui/steps"
+import { Tabs, TabsList, TabsTrigger, TabsDivider, TabsContent } from "@/components/ui/tabs"
 
 # Switch
 
@@ -15,33 +18,46 @@ A control that allows the user to toggle between checked and not checked.
 <Preview code={`import { Switch } from "@/components/ui/switch";
 
 <Switch />`}>
-  <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-    <Switch />
+  <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+    {/* <Switch /> */}
     <Switch defaultChecked />
+    Airplane mode
   </div>
 </Preview>
 
 ## Installation
 
-<Steps>
-<Step title="Install dependencies">
-
-<CodeInstall
-  tabs={[
-    { label: "npm", code: "npm install @base-ui/react" },
-    { label: "pnpm", code: "pnpm add @base-ui/react" },
-    { label: "yarn", code: "yarn add @base-ui/react" },
-    { label: "bun", code: "bun add @base-ui/react" },
-  ]}
-/>
-
-</Step>
-<Step title="Copy the component">
-
-Copy and paste the following code into your project.
-
-```tsx
-"use client";
+<Tabs defaultValue="command"  className='py-4'>
+  <TabsList  className='my-3'>
+    <TabsTrigger value="command">Command</TabsTrigger>
+    <TabsDivider />
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="command">
+    <CodeInstall
+      tabs={[
+        { label: "npm", code: "npx shadcn@latest add switch" },
+        { label: "pnpm", code: "pnpm dlx shadcn@latest add switch" },
+        { label: "yarn", code: "npx shadcn@latest add switch" },
+        { label: "bun", code: "bun dlx shadcn@latest add switch" },
+      ]}
+    />
+  </TabsContent>
+  <TabsContent value="manual">
+    <Steps>
+      <Step title="Install dependencies">
+        <CodeInstall
+          tabs={[
+            { label: "npm", code: "npm install @base-ui/react" },
+            { label: "pnpm", code: "pnpm add @base-ui/react" },
+            { label: "yarn", code: "yarn add @base-ui/react" },
+            { label: "bun", code: "bun add @base-ui/react" },
+          ]}
+        />
+      </Step>
+      <Step title="Copy the component">
+        <ExpandableCode>
+          <CodeBlock code={`"use client";
 
 import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { cn } from "@/lib/utils";
@@ -71,16 +87,15 @@ function Switch({
   );
 }
 
-export { Switch };
-```
-
-</Step>
-<Step title="Update imports">
-
-Update the import paths to match your project setup.
-
-</Step>
-</Steps>
+export { Switch };`} language="tsx" showLineNumbers={true} />
+        </ExpandableCode>
+      </Step>
+      <Step title="Update imports">
+        Update the import paths to match your project setup.
+      </Step>
+    </Steps>
+  </TabsContent>
+</Tabs>
 
 ## Usage
 

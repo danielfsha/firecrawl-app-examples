@@ -8,4 +8,8 @@ export const components = defineDocs({
   dir: "content/components",
 });
 
+export const learn = defineDocs({
+  dir: "content/learn",
+});
+
 export default defineConfig();

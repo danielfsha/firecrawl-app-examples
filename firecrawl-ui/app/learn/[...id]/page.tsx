@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
-import { componentSource, learnSource } from "@/lib/source";
+import { learnSource, componentSource } from "@/lib/source";
 import {
   ArticleRoot,
   ArticleHeader,
   ArticleContent,
 } from "@/components/article";
-import { ComponentSidebar } from "./sidebar";
-import { ComponentTOC } from "./component-toc";
 import { GutterLayout } from "@/components/ui/gutter-layout";
-import { PageNav } from "@/components/ui/page-nav";
+import { Sidebar } from "@/components/ui/sidebar";
+import { ComponentTOC } from "@/app/component/[...id]/component-toc";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 
@@ -25,47 +24,27 @@ function extractTocText(title: unknown): string {
 }
 
 export async function generateStaticParams() {
-  return componentSource.generateParams();
+  return learnSource.generateParams();
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ id?: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = componentSource.getPage(params.slug);
+  const page = learnSource.getPage(params.id);
   if (!page) return {};
 
-  const title = `${page.data.title} - Firecrawl UI`;
-  const description =
-    page.data.description || `${page.data.title} component documentation.`;
-  const url = `https://ui.firecrawl.dev/component/${params.slug?.join("/")}`;
-
   return {
-    title,
-    description,
-    openGraph: {
-      type: "article",
-      title,
-      description,
-      url,
-      siteName: "Firecrawl UI",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-    alternates: {
-      canonical: url,
-    },
+    title: `${page.data.title} - Firecrawl UI`,
+    description: page.data.description,
   };
 }
 
-export default async function ComponentDetailPage(props: {
+export default async function LearnPage(props: {
   params: Promise<{ id: string[] }>;
 }) {
   const params = await props.params;
-  const page = componentSource.getPage(params.id);
+  const page = learnSource.getPage(params.id);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -73,38 +52,27 @@ export default async function ComponentDetailPage(props: {
   const title = page.data.title;
   const description = page.data.description ?? "";
 
-  const allPages = componentSource.getPages();
-  const learnPages = learnSource.getPages();
+  const allLearnPages = learnSource.getPages();
+  const allComponentPages = componentSource.getPages();
 
   const sidebarSections = [
-    ...(learnPages.length > 0
+    ...(allLearnPages.length > 0
       ? [{
           title: "Get Started",
-          items: learnPages.map((p) => ({ label: p.data.title, href: p.url })),
+          items: allLearnPages.map((p) => ({ label: p.data.title, href: p.url })),
         }]
       : []),
     {
       title: "Components",
-      count: allPages.length,
-      items: allPages.map((p) => ({ label: p.data.title, href: p.url })),
+      count: allComponentPages.length,
+      items: allComponentPages.map((p) => ({ label: p.data.title, href: p.url })),
     },
   ];
-
-  // Compute prev/next pages
-  const currentIdx = allPages.findIndex((p) => p.url === page.url);
-  const prevPage = currentIdx > 0 ? allPages[currentIdx - 1] : null;
-  const nextPage =
-    currentIdx < allPages.length - 1 ? allPages[currentIdx + 1] : null;
 
   return (
     <GutterLayout
       className="h-screen"
-      left={
-        <ComponentSidebar
-          sections={sidebarSections}
-          activeHref={page.url}
-        />
-      }
+      left={<Sidebar sections={sidebarSections} activeHref={page.url} />}
       right={
         <div className="px-4">
           <ComponentTOC
@@ -117,16 +85,12 @@ export default async function ComponentDetailPage(props: {
         </div>
       }
     >
-      <div className="px-4 lg:px-10 overflow-x-hidden overflow-y-scroll">
+      <div className="px-4 lg:px-10 overflow-x-hidden overflow-y-auto">
         <ArticleRoot data={{ title, description, slug }}>
           <ArticleHeader />
           <ArticleContent>
             <MDX components={getMDXComponents()} />
           </ArticleContent>
-          <PageNav
-            prev={prevPage ? { label: prevPage.data.title, href: prevPage.url } : null}
-            next={nextPage ? { label: nextPage.data.title, href: nextPage.url } : null}
-          />
         </ArticleRoot>
       </div>
     </GutterLayout>

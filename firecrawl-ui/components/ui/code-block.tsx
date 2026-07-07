@@ -179,7 +179,7 @@ function CodeBlock({
               {tokens.map((line: Token[], index: number) => {
                 const lineNumber = index + 1;
                 const formattedLineNumber = String(lineNumber);
-                const lineProps = getLineProps({ line, key: index });
+                const { key: _lineKey, ...lineProps } = getLineProps({ line, key: index });
 
                 return (
                   <span
@@ -196,7 +196,7 @@ function CodeBlock({
                       {line.length === 0
                         ? " "
                         : line.map((token: Token, tokenIndex: number) => {
-                            const tokenProps = getTokenProps({ token, key: tokenIndex });
+                            const { key: _key, ...tokenProps } = getTokenProps({ token, key: tokenIndex });
                             return (
                               <span key={tokenIndex} {...tokenProps} className={cn(tokenProps.className, "font-mono")} />
                             );

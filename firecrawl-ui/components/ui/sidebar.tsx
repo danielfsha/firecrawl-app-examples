@@ -10,19 +10,29 @@ interface SidebarItem {
   isNew?: boolean;
 }
 
-interface SidebarProps {
+interface SidebarSection {
+  title: string;
+  count?: number;
   items: SidebarItem[];
+}
+
+interface SidebarProps {
+  sections: SidebarSection[];
   className?: string;
   activeHref?: string;
 }
 
-function Sidebar({ items, className, activeHref }: SidebarProps) {
+function Sidebar({ sections, className, activeHref }: SidebarProps) {
+  // Flatten all items for indexing
+  const allItems = sections.flatMap((s) => s.items);
   const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
   const [activeIdx, setActiveIdx] = React.useState<number | null>(() => {
     if (!activeHref) return null;
-    const idx = items.findIndex((item) => item.href === activeHref);
+    const idx = allItems.findIndex((item) => item.href === activeHref);
     return idx >= 0 ? idx : null;
   });
+
+  let globalIdx = 0;
 
   return (
     <aside
@@ -31,22 +41,29 @@ function Sidebar({ items, className, activeHref }: SidebarProps) {
         className
       )}
     >
-      <div className="flex items-center gap-2 px-3 pb-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-(--fc-black-alpha-40)">
-          Components
-        </span>
-        <span className="text-xs text-(--fc-black-alpha-32) tabular-nums">
-          {items.length}
-        </span>
-      </div>
       <LayoutGroup>
         <nav
-          className="flex flex-col gap-0.5"
+          className="flex flex-col"
           onMouseLeave={() => setHoveredIdx(null)}
         >
-          {items.map((item, idx) => {
-            const isHovered = hoveredIdx === idx;
-            const isActive = activeIdx === idx;
+          {sections.map((section, sIdx) => {
+            const sectionStart = globalIdx;
+            return (
+              <div key={sIdx} className="flex flex-col gap-0.5 mb-4">
+                <div className="flex items-center gap-2 px-3 pb-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-(--fc-black-alpha-40)">
+                    {section.title}
+                  </span>
+                  {section.count !== undefined && (
+                    <span className="text-xs text-(--fc-black-alpha-32) tabular-nums">
+                      {section.count}
+                    </span>
+                  )}
+                </div>
+                {section.items.map((item) => {
+                  const idx = globalIdx++;
+                  const isHovered = hoveredIdx === idx;
+                  const isActive = activeIdx === idx;
 
             return (
               <a
@@ -93,6 +110,9 @@ function Sidebar({ items, className, activeHref }: SidebarProps) {
                   </span>
                 )}
               </a>
+                  );
+                })}
+              </div>
             );
           })}
         </nav>
@@ -102,4 +122,4 @@ function Sidebar({ items, className, activeHref }: SidebarProps) {
 }
 
 export { Sidebar };
-export type { SidebarItem };
+export type { SidebarItem, SidebarSection };

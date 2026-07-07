@@ -6,9 +6,13 @@ var docs = defineDocs({
 var components = defineDocs({
   dir: "content/components"
 });
+var learn = defineDocs({
+  dir: "content/learn"
+});
 var source_config_default = defineConfig();
 export {
   components,
   source_config_default as default,
-  docs
+  docs,
+  learn
 };

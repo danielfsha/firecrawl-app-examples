@@ -1,4 +1,4 @@
-import { docs, components } from "collections/server";
+import { docs, components, learn } from "collections/server";
 import { loader } from "fumadocs-core/source";
 
 export const source = loader({
@@ -9,4 +9,9 @@ export const source = loader({
 export const componentSource = loader({
   baseUrl: "/component",
   source: components.toFumadocsSource(),
+});
+
+export const learnSource = loader({
+  baseUrl: "/learn",
+  source: learn.toFumadocsSource(),
 });
