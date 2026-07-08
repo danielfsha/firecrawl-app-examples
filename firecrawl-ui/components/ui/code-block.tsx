@@ -128,7 +128,7 @@ function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("relative overflow-hidden rounded-xl bg-[#F7F7F7] border border-(--fc-border-faint) shadow-[0_0px_0px_1px_rgba(0,0,0,0.01),0_2px_8px_0px_rgba(0,0,0,0.04)]", className)}
+      className={cn("relative overflow-hidden rounded-xl bg-white border border-(--fc-border-faint) shadow-[0_0px_0px_1px_rgba(0,0,0,0.01),0_2px_8px_0px_rgba(0,0,0,0.04)]", className)}
       {...props}
     >
       {/* Copy button */}
