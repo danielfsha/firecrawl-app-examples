@@ -146,12 +146,13 @@ export function SiteNavbar() {
             </LogoMenuItem>
           </Logo>
           <div className="hidden lg:flex items-center gap-1">
-            <NavbarDropdown id="products" label="Products" />
-            <NavbarDropdown id="resources" label="Resources" />
+            {/* <NavbarDropdown id="products" label="Products" />
+            <NavbarDropdown id="resources" label="Resources" /> */}
             {/* <NavbarLink href="/pricing">Pricing</NavbarLink>
             <NavbarLink href="/docs">Docs</NavbarLink>
             <NavbarLink href="/blog">Blog</NavbarLink> */}
-            <NavbarLink href="/playground">Playground</NavbarLink>
+            <NavbarLink href="/component/button">components</NavbarLink>
+            <NavbarLink href="/blocks">Blocks</NavbarLink>
           </div>
           <div className="flex items-center gap-2">
             <a
@@ -338,7 +339,7 @@ export function SiteNavbar() {
 
       {/* Mobile menu */}
       <NavbarMobileMenu>
-        <NavbarMobileDropdown id="products" label="Products">
+        {/* <NavbarMobileDropdown id="products" label="Products">
           <NavbarMobileSectionTitle>Endpoints</NavbarMobileSectionTitle>
           <NavbarMobileDropdownItem href="/products/search">
             Search
@@ -383,7 +384,7 @@ export function SiteNavbar() {
           <NavbarMobileDropdownItem href="/templates">
             Templates
           </NavbarMobileDropdownItem>
-        </NavbarMobileDropdown>
+        </NavbarMobileDropdown> */}
         <NavbarMobileLink href="/pricing">Pricing</NavbarMobileLink>
         <NavbarMobileLink href="/docs">Docs</NavbarMobileLink>
         <NavbarMobileLink href="/blog">Blog</NavbarMobileLink>

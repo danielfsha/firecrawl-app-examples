@@ -356,7 +356,7 @@ code::after {
   }
   @media (min-width: 1024px) {
     :root {
-      --layout-3col-cols: 30% 1fr 30%;
+      --layout-3col-cols: 25% 1fr 25%;
     }
   }
 }

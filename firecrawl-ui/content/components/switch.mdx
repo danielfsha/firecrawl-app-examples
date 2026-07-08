@@ -3,13 +3,19 @@ title: Switch
 description: A control that allows the user to toggle between checked and not checked.
 ---
 
-import { Switch } from "@/components/ui/switch"
-import { Preview } from "@/components/mdx/preview"
-import { CodeInstall } from "@/components/ui/code-install"
-import { CodeBlock } from "@/components/ui/code-block"
-import { ExpandableCode } from "@/components/expandable-code"
-import { Steps, Step } from "@/components/ui/steps"
-import { Tabs, TabsList, TabsTrigger, TabsDivider, TabsContent } from "@/components/ui/tabs"
+import { Switch } from "@/components/ui/switch";
+import { Preview } from "@/components/mdx/preview";
+import { CodeInstall } from "@/components/ui/code-install";
+import { CodeBlock } from "@/components/ui/code-block";
+import { ExpandableCode } from "@/components/expandable-code";
+import { Steps, Step } from "@/components/ui/steps";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsDivider,
+  TabsContent,
+} from "@/components/ui/tabs";
 
 # Switch
 
@@ -63,28 +69,28 @@ import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { cn } from "@/lib/utils";
 
 function Switch({
-  className,
-  size = "default",
-  ...props
+className,
+size = "default",
+...props
 }: SwitchPrimitive.Root.Props & {
-  size?: "sm" | "default";
+size?: "sm" | "default";
 }) {
-  return (
-    <SwitchPrimitive.Root
-      data-slot="switch"
-      data-size={size}
-      className={cn(
-        "peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all data-[size=default]:h-[20px] data-[size=default]:w-[50px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] data-checked:bg-primary data-unchecked:bg-input data-disabled:cursor-not-allowed data-disabled:opacity-50",
-        className
-      )}
-      {...props}
-    >
-      <SwitchPrimitive.Thumb
-        data-slot="switch-thumb"
-        className="pointer-events-none block rounded-full bg-background ring-0 transition-transform group-data-[size=default]/switch:h-[16px] group-data-[size=default]/switch:w-[28px] group-data-[size=sm]/switch:size-3"
-      />
-    </SwitchPrimitive.Root>
-  );
+return (
+
+<SwitchPrimitive.Root
+data-slot="switch"
+data-size={size}
+className={cn(
+"peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all data-[size=default]:h-[20px] data-[size=default]:w-[50px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] data-checked:bg-primary data-unchecked:bg-input data-disabled:cursor-not-allowed data-disabled:opacity-50",
+className
+)}
+{...props} >
+<SwitchPrimitive.Thumb
+data-slot="switch-thumb"
+className="pointer-events-none block rounded-full bg-background ring-0 transition-transform group-data-[size=default]/switch:h-[16px] group-data-[size=default]/switch:w-[28px] group-data-[size=sm]/switch:size-3"
+/>
+</SwitchPrimitive.Root>
+);
 }
 
 export { Switch };`} language="tsx" showLineNumbers={true} />
@@ -123,8 +129,10 @@ export { Switch };`} language="tsx" showLineNumbers={true} />
 
 Add the `disabled` prop to the Switch component to disable the switch.
 
-<Preview code={`<Switch disabled />
-<Switch disabled defaultChecked />`}>
+<Preview
+  code={`<Switch disabled />
+<Switch disabled defaultChecked />`}
+>
   <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
     <Switch disabled />
     <Switch disabled defaultChecked />
@@ -135,10 +143,12 @@ Add the `disabled` prop to the Switch component to disable the switch.
 
 Use the `size` prop to change the size of the switch.
 
-<Preview code={`<Switch size="sm" />
+<Preview
+  code={`<Switch size="sm" />
 <Switch size="default" />
 <Switch size="sm" defaultChecked />
-<Switch size="default" defaultChecked />`}>
+<Switch size="default" defaultChecked />`}
+>
   <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
     <Switch size="sm" />
     <Switch size="default" />
@@ -151,13 +161,13 @@ Use the `size` prop to change the size of the switch.
 
 ### Switch
 
-| Prop | Type | Default |
-|------|------|---------|
-| `defaultChecked` | `boolean` | `false` |
-| `checked` | `boolean` | — |
-| `onCheckedChange` | `(checked: boolean) => void` | — |
-| `disabled` | `boolean` | `false` |
-| `size` | `"sm" \| "default"` | `"default"` |
-| `className` | `string` | — |
+| Prop              | Type                         | Default     |
+| ----------------- | ---------------------------- | ----------- |
+| `defaultChecked`  | `boolean`                    | `false`     |
+| `checked`         | `boolean`                    | —           |
+| `onCheckedChange` | `(checked: boolean) => void` | —           |
+| `disabled`        | `boolean`                    | `false`     |
+| `size`            | `"sm" \| "default"`          | `"default"` |
+| `className`       | `string`                     | —           |
 
 See the [Base UI Switch documentation](https://base-ui.com/react/components/switch) for more information.

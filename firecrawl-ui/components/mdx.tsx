@@ -5,6 +5,7 @@ import { CodeInstall } from "@/components/ui/code-install";
 import { CodeBlock } from "@/components/ui/code-block";
 import { ExpandableCode } from "@/components/expandable-code";
 import { Steps, Step } from "@/components/ui/steps";
+import { SectionTitle } from "@/components/mdx/section-title";
 
 function Pre({ children, ...props }: React.ComponentProps<"pre">) {
   const codeEl = children as React.ReactElement<{
@@ -60,12 +61,16 @@ export function getMDXComponents(components?: MDXComponents) {
     ...components,
     // Override AFTER spreading to ensure our components take priority
     pre: Pre,
+    h2: ({ children, id, ...props }: React.ComponentProps<"h2">) => (
+      <SectionTitle id={id}>{children}</SectionTitle>
+    ),
     Preview,
     CodeInstall,
     CodeBlock,
     ExpandableCode,
     Steps,
     Step,
+    SectionTitle,
   } satisfies MDXComponents;
 }
 

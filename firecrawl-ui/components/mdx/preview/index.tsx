@@ -43,7 +43,7 @@ export function Preview({
           justifyContent: "center",
           minHeight: "260px",
           padding: "32px 24px",
-          background: "var(--fc-surface)",
+          background: "transparent",
         }}
       >
         {children}

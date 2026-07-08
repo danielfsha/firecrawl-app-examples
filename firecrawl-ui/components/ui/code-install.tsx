@@ -63,13 +63,13 @@ function CodeInstall({ tabs, className }: CodeInstallProps) {
           </TabsList>
         </Tabs>
       </div>
-      <div className="pl-4">
+      <div className="py-1">
         <CodeBlock
-        className="bg-transparent border-none"
-        code={active.code}
-        language={active.language || "bash"}
-        showLineNumbers={false}
-      />
+          className="bg-transparent border-none rounded-none shadow-none"
+          code={active.code}
+          language={active.language || "bash"}
+          showLineNumbers={false}
+        />
       </div>
     </div>
   );

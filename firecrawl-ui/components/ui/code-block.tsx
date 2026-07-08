@@ -22,7 +22,7 @@ type Language =
 
 const lightTheme: PrismTheme = {
   plain: {
-    color: "#262626",
+    color: "#374151",
     backgroundColor: "transparent",
   },
   styles: [
@@ -31,44 +31,40 @@ const lightTheme: PrismTheme = {
       style: { color: "#9CA3AF", fontStyle: "italic" },
     },
     {
-      types: ["keyword", "operator"],
-      style: { color: "#D63D68" },
+      types: ["keyword", "operator", "builtin"],
+      style: { color: "#E85D04" },
     },
     {
-      types: ["string"],
-      style: { color: "#D97706" },
-    },
-    {
-      types: ["number", "boolean"],
+      types: ["string", "char"],
       style: { color: "#B45309" },
     },
     {
+      types: ["number", "boolean"],
+      style: { color: "#9061FF" },
+    },
+    {
       types: ["function", "method", "function-variable"],
-      style: { color: "#16A34A" },
+      style: { color: "#7C3AED" },
     },
     {
-      types: ["class-name", "constant"],
-      style: { color: "#15803D" },
+      types: ["class-name", "constant", "tag"],
+      style: { color: "#E85D04" },
     },
     {
-      types: ["tag", "selector"],
-      style: { color: "#16A34A" },
+      types: ["attr-name", "property"],
+      style: { color: "#7C3AED" },
     },
     {
-      types: ["attr-name"],
-      style: { color: "#15803D" },
+      types: ["selector"],
+      style: { color: "#E85D04" },
     },
     {
       types: ["punctuation"],
-      style: { color: "#6B7280" },
-    },
-    {
-      types: ["property"],
-      style: { color: "#0891B2" },
+      style: { color: "#9CA3AF" },
     },
     {
       types: ["parameter", "variable", "symbol", "plain"],
-      style: { color: "#262626" },
+      style: { color: "#374151" },
     },
   ],
 };
@@ -132,16 +128,21 @@ function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("relative overflow-hidden pt-3", className)}
+      className={cn("relative overflow-hidden rounded-xl bg-[#F7F7F7] border border-(--fc-border-faint) shadow-[0_0px_0px_1px_rgba(0,0,0,0.01),0_2px_8px_0px_rgba(0,0,0,0.04)]", className)}
       {...props}
     >
       {/* Copy button */}
-      <div className="absolute top-2 right-2 z-10">
+      <div className="absolute top-3 right-3 z-10">
         <button
           type="button"
           onClick={() => copy(effectiveCode)}
           aria-label={isCopied ? "Copied" : "Copy code"}
-          className="flex items-center justify-center h-7 w-7 rounded-md text-muted-foreground hover:text-foreground hover:bg-(--fc-black-alpha-4) transition-colors cursor-pointer"
+          className={cn(
+            "flex items-center justify-center h-7 w-7 rounded-md transition-colors cursor-pointer",
+            isCopied
+              ? "bg-primary/20 text-primary"
+              : "text-muted-foreground hover:text-foreground hover:bg-(--fc-black-alpha-4)"
+          )}
         >
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.div
@@ -171,7 +172,8 @@ function CodeBlock({
           <pre
             className={cn(
               prismClassName,
-              "overflow-x-auto overflow-y-hidden p-0 pb-3 text-[15px] leading-5 font-mono w-full flex flex-col overflow-hidden"
+              "overflow-x-auto overflow-y-hidden px-6 text-[14px] leading-7 font-mono w-full",
+              showLineNumbers ? "py-5" : "py-3"
             )}
             style={{ ...style }}
           >
@@ -183,12 +185,11 @@ function CodeBlock({
 
                 return (
                   <span
-                    {...lineProps}
                     key={index}
-                    className={cn(lineProps.className, "flex w-full items-start gap-3")}
+                    className="flex w-full items-start gap-5"
                   >
                     {showLineNumbers && (
-                      <span className="w-8 shrink-0 select-none text-right text-muted-foreground/50 font-mono">
+                      <span className="w-8 shrink-0 select-none text-right text-[#C8C8C8] font-mono text-[13px]">
                         {isBash ? "$" : formattedLineNumber}
                       </span>
                     )}
@@ -198,7 +199,7 @@ function CodeBlock({
                         : line.map((token: Token, tokenIndex: number) => {
                             const { key: _key, ...tokenProps } = getTokenProps({ token, key: tokenIndex });
                             return (
-                              <span key={tokenIndex} {...tokenProps} className={cn(tokenProps.className, "font-mono")} />
+                              <span key={tokenIndex} {...tokenProps} />
                             );
                           })}
                     </span>

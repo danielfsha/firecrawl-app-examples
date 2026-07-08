@@ -4,10 +4,11 @@ import {
   ArticleRoot,
   ArticleHeader,
   ArticleContent,
-} from "@/components/article";
+} from "@/components/mdx/article";
 import { GutterLayout } from "@/components/ui/gutter-layout";
 import { Sidebar } from "@/components/ui/sidebar";
 import { ComponentTOC } from "@/app/component/[...id]/component-toc";
+import { SectionCounterProvider } from "@/components/mdx/section-title";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 
@@ -89,7 +90,9 @@ export default async function LearnPage(props: {
         <ArticleRoot data={{ title, description, slug }}>
           <ArticleHeader />
           <ArticleContent>
-            <MDX components={getMDXComponents()} />
+            <SectionCounterProvider total={page.data.toc.filter((item) => item.depth === 2).length}>
+              <MDX components={getMDXComponents()} />
+            </SectionCounterProvider>
           </ArticleContent>
         </ArticleRoot>
       </div>

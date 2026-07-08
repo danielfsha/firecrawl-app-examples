@@ -4,11 +4,12 @@ import {
   ArticleRoot,
   ArticleHeader,
   ArticleContent,
-} from "@/components/article";
+} from "@/components/mdx/article";
 import { ComponentSidebar } from "./sidebar";
 import { ComponentTOC } from "./component-toc";
 import { GutterLayout } from "@/components/ui/gutter-layout";
 import { PageNav } from "@/components/ui/page-nav";
+import { SectionCounterProvider } from "@/components/mdx/section-title";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 
@@ -121,7 +122,9 @@ export default async function ComponentDetailPage(props: {
         <ArticleRoot data={{ title, description, slug }}>
           <ArticleHeader />
           <ArticleContent>
-            <MDX components={getMDXComponents()} />
+            <SectionCounterProvider total={page.data.toc.filter((item) => item.depth === 2).length}>
+              <MDX components={getMDXComponents()} />
+            </SectionCounterProvider>
           </ArticleContent>
           <PageNav
             prev={prevPage ? { label: prevPage.data.title, href: prevPage.url } : null}

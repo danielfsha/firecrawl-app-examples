@@ -12,7 +12,7 @@ function Card({
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card p-1 text-sm text-card-foreground bg-white border shadow-[0_0px_0px_1px_rgba(0,0,0,0.01),0_20px_44px_0px_rgba(0,0,0,0.05)] [--card-spacing:--spacing(1)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(1)] *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        "font-sans group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card p-1 text-sm text-card-foreground bg-white border shadow-[0_0px_0px_1px_rgba(0,0,0,0.01),0_20px_44px_0px_rgba(0,0,0,0.05)] [--card-spacing:--spacing(1)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(1)] *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-(--card-spacing)", className)}
+      className={cn("px-2", className)}
       {...props}
     />
   );

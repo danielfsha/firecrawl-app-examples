@@ -3,9 +3,12 @@ title: Tabs
 description: A tabbed navigation component with animated active indicators, icons, and dividers.
 ---
 
-import { Tabs, TabsList, TabsTrigger, TabsDivider } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsDivider, TabsContent } from "@/components/ui/tabs"
 import { Preview } from "@/components/mdx/preview"
 import { CodeInstall } from "@/components/ui/code-install"
+import { CodeBlock } from "@/components/ui/code-block"
+import { ExpandableCode } from "@/components/expandable-code"
+import { Steps, Step } from "@/components/ui/steps"
 
 # Tabs
 
@@ -101,16 +104,111 @@ A tabbed navigation component with animated active indicators, icons, and divide
   </Tabs>
 </Preview>
 
+
 ## Installation
 
-<CodeInstall
-  tabs={[
-    { label: "npm", code: "npm install firecrawl" },
-    { label: "pnpm", code: "pnpm add firecrawl" },
-    { label: "yarn", code: "yarn add firecrawl" },
-    { label: "bun", code: "bun add firecrawl" },
-  ]}
-/>
+<Tabs defaultValue="command" className="py-4">
+  <TabsList className="my-3">
+    <TabsTrigger value="command">Command</TabsTrigger>
+    <TabsDivider />
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="command">
+    <CodeInstall
+      tabs={[
+        { label: "npm", code: "npx shadcn@latest add tabs" },
+        { label: "pnpm", code: "pnpm dlx shadcn@latest add tabs" },
+        { label: "yarn", code: "npx shadcn@latest add tabs" },
+        { label: "bun", code: "bun dlx shadcn@latest add tabs" },
+      ]}
+    />
+  </TabsContent>
+  <TabsContent value="manual">
+    <Steps>
+      <Step title="Install dependencies">
+        <CodeInstall
+          tabs={[
+            { label: "npm", code: "npm install @base-ui/react" },
+            { label: "pnpm", code: "pnpm add @base-ui/react" },
+            { label: "yarn", code: "yarn add @base-ui/react" },
+            { label: "bun", code: "bun add @base-ui/react" },
+          ]}
+        />
+      </Step>
+      <Step title="Copy the component">
+        <ExpandableCode>
+          <CodeBlock code={`"use client";
+
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
+import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
+import { useActiveElementRect } from "@/hooks/use-active-element-rect";
+
+function Tabs({ className, orientation = "horizontal", ...props }: TabsPrimitive.Root.Props) {
+  return (
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      data-orientation={orientation}
+      className={cn("group/tabs flex gap-2 data-horizontal:flex-col", className)}
+      {...props}
+    />
+  );
+}
+
+function TabsList({ className, variant = "default", children, ...props }) {
+  const { containerRef, rect } = useActiveElementRect("[data-active]");
+  return (
+    <TabsPrimitive.List
+      ref={containerRef}
+      data-slot="tabs-list"
+      className={cn("h-[36px] gap-2 relative inline-flex w-fit items-center justify-center rounded-[10px] p-[2px] text-muted-foreground bg-black/3", className)}
+      {...props}
+    >
+      {rect && (
+        <motion.div
+          className="absolute rounded-[8px] bg-white shadow-sm z-0"
+          layoutId="tabs-indicator"
+          style={{ left: rect.left, top: rect.top, width: rect.width, height: rect.height }}
+          transition={{ type: "spring", stiffness: 500, damping: 35 }}
+        />
+      )}
+      {children}
+    </TabsPrimitive.List>
+  );
+}
+
+function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
+  return (
+    <TabsPrimitive.Tab
+      data-slot="tabs-trigger"
+      className={cn(
+        "relative z-10 inline-flex h-[calc(100%-1px)] items-center justify-center gap-1.5 rounded-sm px-2 py-1 text-sm font-medium whitespace-nowrap text-foreground/40 transition-colors data-active:text-primary",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+function TabsDivider() {
+  return <svg width="1" height="12" viewBox="0 0 1 12" fill="none"><rect width="1" height="12" fill="black" fillOpacity="0.12" /></svg>;
+}
+
+function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
+  return <TabsPrimitive.Panel data-slot="tabs-content" className={cn("flex-1 text-sm outline-none", className)} {...props} />;
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, TabsDivider };`} language="tsx" showLineNumbers={true} />
+        </ExpandableCode>
+      </Step>
+      <Step title="Update imports">
+        Update the import paths to match your project setup.
+      </Step>
+    </Steps>
+  </TabsContent>
+</Tabs>
+
 
 ## Usage
 
